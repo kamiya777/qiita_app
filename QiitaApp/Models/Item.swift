@@ -8,5 +8,6 @@
 struct Item: Identifiable, Codable {
     let id: String
     let title: String
+    var body: String
     let url: String
 }
