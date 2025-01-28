@@ -14,16 +14,13 @@ struct ContentView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     
-    @State private var currentUser = User(accessToken: "aaaa", name: "kamiya", email: "kamiya@example.com")
-    
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 TextField("アクセストークン", text: $viewModel.accessToken)
                     .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(width: 300)
-                
                 Button(action: {
                     viewModel.loginAction { result in
                         switch result {
@@ -42,19 +39,15 @@ struct ContentView: View {
                         .cornerRadius(10)
                 }
                 .padding(.top, 20)
-                
-                NavigationLink(destination: SearchView(), isActive: $isLoggedIn) {
-                    EmptyView()
-                }
-                
-                NavigationLink(destination: SearchView()) {
+                Button(action: {
+                    isLoggedIn = true
+                }) {
                     Text("ログインせずに利用する")
                         .foregroundColor(.blue)
                         .padding()
                 }
                 .padding(.top, 10)
-                
-                NavigationLink(destination: MyPageView(user: currentUser)) {
+                NavigationLink(destination: MyPageView()) {
                     Text("マイページ")
                         .foregroundColor(.blue)
                         .padding()
@@ -66,7 +59,9 @@ struct ContentView: View {
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("エラー"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
             }
+            .navigationDestination(isPresented: $isLoggedIn) {
+                SearchView()
+            }
         }
     }
 }
-
