@@ -11,12 +11,13 @@ struct ContentView: View {
     @ObservedObject var viewModel = ContentViewModel()
     
     @State private var isLoggedIn = false
+    @State private var isActive = false
     @State private var showAlert = false
     @State private var alertMessage = ""
     
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 TextField("アクセストークン", text: $viewModel.accessToken)
                     .padding()
@@ -27,7 +28,9 @@ struct ContentView: View {
                     viewModel.loginAction { result in
                         switch result {
                         case .success:
+                            UserDefaults.standard.set(viewModel.accessToken, forKey: "accessToken")
                             isLoggedIn = true
+                            isActive = true
                         case .failure(let error):
                             alertMessage = error.localizedDescription
                             showAlert = true
@@ -42,23 +45,24 @@ struct ContentView: View {
                 }
                 .padding(.top, 20)
                 
-                NavigationLink(destination: SearchView(), isActive: $isLoggedIn) {
-                    EmptyView()
-                }
-                
-                NavigationLink(destination: SearchView()) {
+                Button(action: {
+                    isActive = true
+                }) {
                     Text("ログインせずに利用する")
                         .foregroundColor(.blue)
                         .padding()
                 }
                 .padding(.top, 10)
+                
                 Spacer()
             }
             .padding()
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("エラー"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
             }
+            .navigationDestination(isPresented: $isActive) {
+                MainTabView(isLoggedIn: $isLoggedIn)
+            }
         }
     }
 }
-

@@ -8,50 +8,51 @@
 import SwiftUI
 
 struct MyPageView: View {
-//        @Binding var isLoggedIn: Bool
-//        @ObservedObject var viewModel = MyPageViewModel()
+    @Binding var isLoggedIn: Bool
+    @ObservedObject var viewModel = MyPageViewModel()
     
     var body: some View {
-//        VStack {
-//            if isLoggedIn {
-//                // ログインしている場合の表示
-//                if let user = viewModel.user {
-//                    Text("マイページ")
-//                        .font(.largeTitle)
-//                        .padding()
-//                    
-//                    VStack(alignment: .leading, spacing: 10) {
-//                        Text("名前: \(user.name)")
-//                        Text("フォロー数: \(user.followingCount)")
-//                        Text("フォロワー数: \(user.followersCount)")
-//                        Text("記事数: \(user.articleCount)")
-//                        Text("移住地: \(user.location)")
-//                    }
-//                    .padding()
-//                } else {
-//                    ProgressView("読み込み中...")
-//                        .padding()
-//                }
-//            } else {
-//                ContentView()
-//            }
-//            
-//            Spacer()
-//        }
-//        .onAppear {
-//            // もしログインしているなら、ユーザー情報を取得
-//            if isLoggedIn, let token = UserDefaults.standard.string(forKey: "accessToken") {
-//                viewModel.fetchUserData(accessToken: token)
-//            }
-//        }
-        
-        
         VStack {
-            Text("マイページ")
-                .font(.largeTitle)
-                .padding()
-            Text("名前: kamiya")
-            Text("メールアドレス: kamiya@xxx.xxx.com")
+            if isLoggedIn {
+                // ログインしている場合の表示
+                if let user = viewModel.user {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("ユーザー名: \(user.name)")
+                            .font(.headline)
+                        Spacer().frame(height: 20)
+                        Text("フォローしている数: \(user.followees_count)")
+                        Text("フォローされている数: \(user.followers_count)")
+                        Text("Qiitaに公開している記事の数: \(user.items_count)")
+                        Text("移住地: \(user.location ?? "未設定")")
+                    }
+                    .padding(.leading)
+                    
+                    // ログアウトボタン
+                    Button(action: {
+                        viewModel.logout()
+                        isLoggedIn = false
+                    }) {
+                        Text("ログアウト")
+                            .foregroundColor(.red)
+                            .padding()
+                            .background(Capsule().strokeBorder(Color.red, lineWidth: 2))
+                    }
+                    .padding()
+                } else {
+                    ProgressView("読み込み中...")
+                        .padding()
+                }
+            } else {
+                ContentView()
+            }
+            
+            Spacer()
+        }
+        .onAppear {
+            // ログインしているなら、ユーザー情報を取得
+            if isLoggedIn, let token = UserDefaults.standard.string(forKey: "accessToken") {
+                viewModel.fetchUserData(accessToken: token)
+            }
         }
     }
 }

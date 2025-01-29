@@ -7,22 +7,20 @@
 
 import SwiftUI
 
-//struct MainTabView: View {
-//    @Binding var isLoggedIn: Bool
-//    
-//    var body: some View {
-//        TabView {
-//            // Searchタブ
-//            SearchView()
-//                .tabItem {
-//                    Label("検索", systemImage: "magnifyingglass")
-//                }
-//            
-//            // 他のタブ（例: ホーム）
-//            MyPageView(isLoggedIn: $isLoggedIn)
-//                .tabItem {
-//                    Label("検索", systemImage: "magnifyingglass")
-//                }
-//        }
-//    }
-//}
+struct MainTabView: View {
+    @Binding var isLoggedIn: Bool
+    
+    var body: some View {
+        TabView {
+            SearchView()
+                .tabItem {
+                    Label("検索", systemImage: "magnifyingglass")
+                }
+            
+            MyPageView(isLoggedIn: $isLoggedIn)
+                .tabItem {
+                    Label("マイページ", systemImage: "person.circle")
+                }
+        }
+    }
+}

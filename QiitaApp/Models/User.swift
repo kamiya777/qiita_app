@@ -5,10 +5,10 @@
 //  Created by kamiya on 2025/01/25.
 //
 
-struct User: Decodable  {
+struct User: Codable {
     var name: String
-    var followersCount: Int
-    var followingCount: Int
-    var articleCount: Int
-    var location: String
+    var followees_count: Int
+    var followers_count: Int
+    var items_count: Int
+    var location: String?
 }

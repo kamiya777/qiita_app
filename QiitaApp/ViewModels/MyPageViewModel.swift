@@ -18,6 +18,8 @@ class MyPageViewModel: ObservableObject {
         // 初期化時にアクセストークンの有無でログイン状態を判定
         if let token = UserDefaults.standard.string(forKey: "accessToken") {
             self.fetchUserData(accessToken: token)
+        } else {
+            self.isLoggedIn = false
         }
     }
     
@@ -29,19 +31,32 @@ class MyPageViewModel: ObservableObject {
         
         URLSession.shared.dataTaskPublisher(for: request)
             .map { $0.data }
+            .handleEvents(receiveOutput: { data in
+                // レスポンスデータを確認
+                print(String(data: data, encoding: .utf8) ?? "No data")
+            })
             .decode(type: User.self, decoder: JSONDecoder())
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
+            .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
-                case .failure:
-                    self.isLoggedIn = false
+                case .failure(let error):
+                    print("エラー: \(error)")
+                    self?.isLoggedIn = false
                 case .finished:
                     break
                 }
-            }, receiveValue: { user in
-                self.user = user
-                self.isLoggedIn = true
+            }, receiveValue: { [weak self] user in
+                self?.user = user
+                self?.isLoggedIn = true
             })
             .store(in: &cancellables)
+    }
+    func logout() {
+        // アクセストークンを削除
+        UserDefaults.standard.removeObject(forKey: "accessToken")
+        
+        // ユーザー情報をクリア
+        self.user = nil
+        self.isLoggedIn = false
     }
 }

@@ -48,28 +48,16 @@ struct SearchView: View {
             }
             
             // 検索結果が取得できたら遷移
-            NavigationLink(
-                destination: SearchResultView(items: viewModel.searchResults),
-                isActive: $isActive
-            ) {
-                EmptyView()
+            if isActive  {
+                SearchResultView(items: viewModel.searchResults)
             }
-            .hidden()
             
             Spacer()
-            TabView {
-                SearchView()
-                    .tabItem {
-                        Label("検索", systemImage: "magnifyingglass")
-                    }
-                
-                MyPageView()
-                    .tabItem {
-                        Label("マイページ", systemImage: "person.circle")
-                    }
-            }
         }
         .padding()
+        .navigationDestination(isPresented: $isActive) {
+            SearchResultView(items: viewModel.searchResults)
+        }
     }
 }
 
