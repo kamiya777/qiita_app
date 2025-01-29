@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject var viewModel = ContentViewModel()
     
-    @State private var isLoggedIn = false
+    @State private var isActive = false
     @State private var showAlert = false
     @State private var alertMessage = ""
     
@@ -25,7 +25,7 @@ struct ContentView: View {
                     viewModel.loginAction { result in
                         switch result {
                         case .success:
-                            isLoggedIn = true
+                            isActive = true
                         case .failure(let error):
                             alertMessage = error.localizedDescription
                             showAlert = true
@@ -40,7 +40,7 @@ struct ContentView: View {
                 }
                 .padding(.top, 20)
                 Button(action: {
-                    isLoggedIn = true
+                    isActive = true
                 }) {
                     Text("ログインせずに利用する")
                         .foregroundColor(.blue)
@@ -59,7 +59,7 @@ struct ContentView: View {
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("エラー"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
             }
-            .navigationDestination(isPresented: $isLoggedIn) {
+            .navigationDestination(isPresented: $isActive) {
                 SearchView()
             }
         }
