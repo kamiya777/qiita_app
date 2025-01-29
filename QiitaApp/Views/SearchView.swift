@@ -57,6 +57,17 @@ struct SearchView: View {
             .hidden()
             
             Spacer()
+            TabView {
+                SearchView()
+                    .tabItem {
+                        Label("検索", systemImage: "magnifyingglass")
+                    }
+                
+                MyPageView()
+                    .tabItem {
+                        Label("マイページ", systemImage: "person.circle")
+                    }
+            }
         }
         .padding()
     }

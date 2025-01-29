@@ -14,7 +14,6 @@ struct ContentView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     
-    @State private var currentUser = User(accessToken: "aaaa", name: "kamiya", email: "kamiya@example.com")
     
     var body: some View {
         NavigationView {
@@ -49,13 +48,6 @@ struct ContentView: View {
                 
                 NavigationLink(destination: SearchView()) {
                     Text("ログインせずに利用する")
-                        .foregroundColor(.blue)
-                        .padding()
-                }
-                .padding(.top, 10)
-                
-                NavigationLink(destination: MyPageView(user: currentUser)) {
-                    Text("マイページ")
                         .foregroundColor(.blue)
                         .padding()
                 }
