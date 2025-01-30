@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MyPageView: View {
+    var user: User
     
     var body: some View {
         VStack {
@@ -15,8 +16,8 @@ struct MyPageView: View {
                 .font(.largeTitle)
                 .padding()
             
-            Text("名前: kamiya777")
-            Text("メールアドレス: kamiya@xxxxx.com")
+            Text("名前: \(user.name)")
+            Text("メールアドレス: \(user.email)")
         }
     }
 }

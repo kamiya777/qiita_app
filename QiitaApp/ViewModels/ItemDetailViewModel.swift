@@ -12,7 +12,7 @@ class ItemDetailViewModel: ObservableObject {
     @Published var item: Item?
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
-
+    
     func fetchItemDetails(itemId: String) {
         isLoading = true
         let urlString = "https://qiita.com/api/v2/items/\(itemId)"
@@ -24,28 +24,35 @@ class ItemDetailViewModel: ObservableObject {
         }
         
         let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            DispatchQueue.main.async {
-                self?.isLoading = false
-                if let error = error {
+            if let error = error {
+                DispatchQueue.main.async {
                     self?.errorMessage = error.localizedDescription
-                    return
                 }
-                
-                guard let data = data else {
+                return
+            }
+            
+            guard let data = data else {
+                DispatchQueue.main.async {
                     self?.errorMessage = "No data received"
-                    return
                 }
+                return
+            }
+            
+            do {
+                // JSONをデコードしてItemを作成
+                let decodedItem = try JSONDecoder().decode(Item.self, from: data)
                 
-                do {
-                    // JSONをデコードしてItemを作成
-                    let decodedItem = try JSONDecoder().decode(Item.self, from: data)
+                // UI関連の処理だけをメインスレッドで行う
+                DispatchQueue.main.async {
+                    self?.isLoading = false
                     self?.item = decodedItem
-                } catch {
+                }
+            } catch {
+                DispatchQueue.main.async {
                     self?.errorMessage = "Failed to decode data"
                 }
             }
         }
-        
         task.resume()
     }
 }

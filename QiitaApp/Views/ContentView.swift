@@ -54,7 +54,7 @@ struct ContentView: View {
                 }
                 .padding(.top, 10)
                 
-                NavigationLink(destination: MyPageView()) {
+                NavigationLink(destination: MyPageView(user: currentUser)) {
                     Text("マイページ")
                         .foregroundColor(.blue)
                         .padding()
