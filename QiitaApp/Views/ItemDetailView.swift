@@ -13,18 +13,18 @@ struct ItemDetailView: View {
     
     var body: some View {
         VStack {
-            if let item = viewModel.item {
+            if viewModel.isLoading {
+                ProgressView("Loading...")
+                    .progressViewStyle(CircularProgressViewStyle())
+            } else if let item = viewModel.item {
                 Text(item.title)
                     .font(.largeTitle)
                     .padding()
                 
                 ScrollView {
-                    Text(item.body) 
+                    Text(item.body)
                         .padding()
                 }
-            } else if viewModel.isLoading {
-                ProgressView("Loading...")
-                    .progressViewStyle(CircularProgressViewStyle())
             } else if let errorMessage = viewModel.errorMessage {
                 Text("Error: \(errorMessage)")
                     .foregroundColor(.red)
