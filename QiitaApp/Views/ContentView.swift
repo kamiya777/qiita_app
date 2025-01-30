@@ -10,9 +10,12 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject var viewModel = ContentViewModel()
     
+    @State private var isLoggedIn = false
     @State private var isActive = false
     @State private var showAlert = false
     @State private var alertMessage = ""
+    
+    @State private var currentUser = User(accessToken: "aaaa", name: "kamiya", email: "kamiya@example.com")
     
     var body: some View {
         NavigationStack {
@@ -21,10 +24,12 @@ struct ContentView: View {
                     .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(width: 300)
+                
                 Button(action: {
                     viewModel.loginAction { result in
                         switch result {
                         case .success:
+                            isLoggedIn = true
                             isActive = true
                         case .failure(let error):
                             alertMessage = error.localizedDescription
@@ -47,7 +52,7 @@ struct ContentView: View {
                         .padding()
                 }
                 .padding(.top, 10)
-                NavigationLink(destination: MyPageView()) {
+                NavigationLink(destination: MyPageView(user: currentUser)) {
                     Text("マイページ")
                         .foregroundColor(.blue)
                         .padding()
