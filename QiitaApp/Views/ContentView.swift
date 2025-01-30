@@ -15,6 +15,7 @@ struct ContentView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     
+    var isLoggedInState: Bool
     
     var body: some View {
         NavigationStack {
@@ -44,16 +45,16 @@ struct ContentView: View {
                         .cornerRadius(10)
                 }
                 .padding(.top, 20)
-                
-                Button(action: {
-                    isActive = true
-                }) {
-                    Text("ログインせずに利用する")
-                        .foregroundColor(.blue)
-                        .padding()
+                if isLoggedInState {
+                    Button(action: {
+                        isActive = true
+                    }) {
+                        Text("ログインせずに利用する")
+                            .foregroundColor(.blue)
+                            .padding()
+                    }
+                    .padding(.top, 10)
                 }
-                .padding(.top, 10)
-                
                 Spacer()
             }
             .padding()

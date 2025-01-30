@@ -31,16 +31,11 @@ class MyPageViewModel: ObservableObject {
         
         URLSession.shared.dataTaskPublisher(for: request)
             .map { $0.data }
-            .handleEvents(receiveOutput: { data in
-                // レスポンスデータを確認
-                print(String(data: data, encoding: .utf8) ?? "No data")
-            })
             .decode(type: User.self, decoder: JSONDecoder())
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                 case .failure(let error):
-                    print("エラー: \(error)")
                     self?.isLoggedIn = false
                 case .finished:
                     break

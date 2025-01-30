@@ -43,7 +43,7 @@ struct MyPageView: View {
                         .padding()
                 }
             } else {
-                ContentView()
+                ContentView(isLoggedInState: isLoggedIn)
             }
             
             Spacer()
