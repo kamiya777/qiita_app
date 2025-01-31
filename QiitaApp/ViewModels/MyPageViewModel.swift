@@ -35,7 +35,7 @@ class MyPageViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
-                case .failure(let error):
+                case .failure:
                     self?.isLoggedIn = false
                 case .finished:
                     break

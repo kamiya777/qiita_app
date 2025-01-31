@@ -17,7 +17,7 @@ struct MyPageView: View {
                 // ログインしている場合の表示
                 if let user = viewModel.user {
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("ユーザー名: \(user.name)")
+                        Text("ユーザー名: \(user.name ?? "未設定")")
                             .font(.headline)
                         Spacer().frame(height: 20)
                         Text("フォローしている数: \(user.followees_count)")
