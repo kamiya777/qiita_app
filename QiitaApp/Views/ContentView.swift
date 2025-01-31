@@ -15,7 +15,7 @@ struct ContentView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     
-    var isLoggedInState: Bool
+    var isVisible: Bool
     
     var body: some View {
         NavigationStack {
@@ -45,7 +45,7 @@ struct ContentView: View {
                         .cornerRadius(10)
                 }
                 .padding(.top, 20)
-                if isLoggedInState {
+                if isVisible {
                     Button(action: {
                         isActive = true
                     }) {
