@@ -1,0 +1,12 @@
+# MacOS関連
+.DS_Store
+
+# Xcode関連
+*.xcuserdata/
+*.xcuserstate
+*.xccheckout
+*.xcworkspace
+.idea/
+
+# その他、不要なファイル
+*.swp  # Vimのバックアップファイル
