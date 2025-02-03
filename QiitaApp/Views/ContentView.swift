@@ -11,13 +11,14 @@ struct ContentView: View {
     @ObservedObject var viewModel = ContentViewModel()
     
     @State private var isLoggedIn = false
+    @State private var isActive = false
     @State private var showAlert = false
     @State private var alertMessage = ""
     
     @State private var currentUser = User(accessToken: "aaaa", name: "kamiya", email: "kamiya@example.com")
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 TextField("アクセストークン", text: $viewModel.accessToken)
                     .padding()
@@ -29,6 +30,7 @@ struct ContentView: View {
                         switch result {
                         case .success:
                             isLoggedIn = true
+                            isActive = true
                         case .failure(let error):
                             alertMessage = error.localizedDescription
                             showAlert = true
@@ -42,18 +44,14 @@ struct ContentView: View {
                         .cornerRadius(10)
                 }
                 .padding(.top, 20)
-                
-                NavigationLink(destination: SearchView(), isActive: $isLoggedIn) {
-                    EmptyView()
-                }
-                
-                NavigationLink(destination: SearchView()) {
+                Button(action: {
+                    isActive = true
+                }) {
                     Text("ログインせずに利用する")
                         .foregroundColor(.blue)
                         .padding()
                 }
                 .padding(.top, 10)
-                
                 NavigationLink(destination: MyPageView(user: currentUser)) {
                     Text("マイページ")
                         .foregroundColor(.blue)
@@ -66,7 +64,9 @@ struct ContentView: View {
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("エラー"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
             }
+            .navigationDestination(isPresented: $isActive) {
+                SearchView()
+            }
         }
     }
 }
-
