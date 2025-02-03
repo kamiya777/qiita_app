@@ -15,10 +15,4 @@ class MyPageViewModel: ObservableObject {
     init(user: User) {
         self.user = user
     }
-    
-    // 編集ボタンのアクション
-    func editButtonTapped() {
-        // 編集ボタンがタップされた時の処理
-        print("編集ボタンがタップされました!")
-    }
 }
