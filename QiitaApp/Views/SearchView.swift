@@ -13,7 +13,6 @@ struct SearchView: View {
     
     @State private var isSearching: Bool = false
     @State private var isActive: Bool = false
-    @State private var navigateToResults: Bool = false
     
     var body: some View {
         VStack {
@@ -28,7 +27,7 @@ struct SearchView: View {
                 Button(action: {
                     viewModel.searchItems(query: searchText)
                     isSearching = true
-                    navigateToResults = true
+                    isActive = true
                 }) {
                     Text("検索")
                         .foregroundColor(.white)
@@ -49,14 +48,14 @@ struct SearchView: View {
             }
             
             // 検索結果が取得できたら遷移
-            if navigateToResults  {
+            if isActive  {
                 SearchResultView(items: viewModel.searchResults)
             }
             
             Spacer()
         }
         .padding()
-        .navigationDestination(isPresented: $navigateToResults) {
+        .navigationDestination(isPresented: $isActive) {
             SearchResultView(items: viewModel.searchResults)
         }
     }

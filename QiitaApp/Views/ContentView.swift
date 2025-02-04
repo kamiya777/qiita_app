@@ -15,7 +15,7 @@ struct ContentView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     
-    @State private var currentUser = User(accessToken: "aaaa", name: "kamiya", email: "kamiya@example.com")
+    var isVisible: Bool
     
     var body: some View {
         NavigationStack {
@@ -29,6 +29,7 @@ struct ContentView: View {
                     viewModel.loginAction { result in
                         switch result {
                         case .success:
+                            UserDefaults.standard.set(viewModel.accessToken, forKey: "accessToken")
                             isLoggedIn = true
                             isActive = true
                         case .failure(let error):
@@ -44,20 +45,16 @@ struct ContentView: View {
                         .cornerRadius(10)
                 }
                 .padding(.top, 20)
-                Button(action: {
-                    isActive = true
-                }) {
-                    Text("ログインせずに利用する")
-                        .foregroundColor(.blue)
-                        .padding()
+                if isVisible {
+                    Button(action: {
+                        isActive = true
+                    }) {
+                        Text("ログインせずに利用する")
+                            .foregroundColor(.blue)
+                            .padding()
+                    }
+                    .padding(.top, 10)
                 }
-                .padding(.top, 10)
-                NavigationLink(destination: MyPageView(user: currentUser)) {
-                    Text("マイページ")
-                        .foregroundColor(.blue)
-                        .padding()
-                }
-                .padding(.top, 10)
                 Spacer()
             }
             .padding()
@@ -65,7 +62,7 @@ struct ContentView: View {
                 Alert(title: Text("エラー"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
             }
             .navigationDestination(isPresented: $isActive) {
-                SearchView()
+                MainTabView(isLoggedIn: $isLoggedIn)
             }
         }
     }

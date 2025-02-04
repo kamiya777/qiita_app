@@ -5,8 +5,10 @@
 //  Created by kamiya on 2025/01/25.
 //
 
-struct User {
-    var accessToken: String
-    var name: String
-    var email: String
+struct User: Codable {
+    var name: String?
+    var followees_count: Int?
+    var followers_count: Int?
+    var items_count: Int?
+    var location: String?
 }
