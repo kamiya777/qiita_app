@@ -1,5 +1,22 @@
 # Xcode関連のファイルを無視
+
+# Xcodeのユーザー固有の状態
 *.xcuserstate
+
+# Xcodeのプロジェクトのユーザー固有データ
+QiitaApp.xcodeproj/xcuserdata/
+
+# Xcodeのワークスペースのユーザー固有データ
 *.xcodeproj/project.xcworkspace/xcuserdata/
 *.xcworkspace/xcuserdata/
+
+# Xcodeのビルド生成ファイル
 DerivedData/
+
+# ビルド出力ディレクトリ
+build/
+
+# Xcodeスキーム設定（個別設定は不要）
+*.xcscheme
+
+gitignore.save
