@@ -11,6 +11,7 @@ import Combine
 class MyPageViewModel: ObservableObject {
     @Published var user: User?
     @Published var isLoggedIn = false
+    @Published var hasError = false
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -36,6 +37,7 @@ class MyPageViewModel: ObservableObject {
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                 case .failure:
+                    self?.hasError = true
                     self?.isLoggedIn = false
                 case .finished:
                     break
@@ -53,5 +55,6 @@ class MyPageViewModel: ObservableObject {
         // ユーザー情報をクリア
         self.user = nil
         self.isLoggedIn = false
+        self.hasError = false
     }
 }

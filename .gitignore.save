@@ -1,12 +1,6 @@
-# MacOS関連
-.DS_Store
-
-# Xcode関連
-*.xcuserdata/
+# Xcode関連のファイルを無視
 *.xcuserstate
-*.xccheckout
-*.xcworkspace
-.idea/
-
-# その他、不要なファイル
-*.swp  # Vimのバックアップファイル
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcworkspace/xcuserdata/
+*.xcbkptlist
+DerivedData/
