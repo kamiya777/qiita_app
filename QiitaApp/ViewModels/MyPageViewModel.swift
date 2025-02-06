@@ -32,7 +32,7 @@ class MyPageViewModel: ObservableObject {
         
         URLSession.shared.dataTaskPublisher(for: request)
             .map { $0.data }
-            .decode(type: User.self, decoder: JSONDecoder())
+            .decode(type: ApiUser.self, decoder: JSONDecoder())
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
@@ -42,8 +42,8 @@ class MyPageViewModel: ObservableObject {
                 case .finished:
                     break
                 }
-            }, receiveValue: { [weak self] user in
-                self?.user = user
+            }, receiveValue: { [weak self] response in
+                self?.user = User(response: response)
                 self?.isLoggedIn = true
             })
             .store(in: &cancellables)

@@ -39,8 +39,8 @@ class SearchViewModel: ObservableObject {
                 // レスポンス処理
                 if let data = data {
                     do {
-                        let decodedResponse = try JSONDecoder().decode([Item].self, from: data)
-                        self.searchResults = decodedResponse
+                        let decodedResponse = try JSONDecoder().decode([ApiItem].self, from: data)
+                        self.searchResults = decodedResponse.map { Item(from: $0) }
                     } catch {
                         self.errorMessage = "データの解析に失敗しました"
                     }

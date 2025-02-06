@@ -1,11 +1,11 @@
 //
-//  Item.swift
+//  ApiItem.swift
 //  QiitaApp
 //
-//  Created by kamiya on 2025/01/25.
+//  Created by kamiya on 2025/02/06.
 //
 
-struct Item: Identifiable, Codable {
+struct ApiItem: Codable {
     let id: String
     let title: String
     var body: String

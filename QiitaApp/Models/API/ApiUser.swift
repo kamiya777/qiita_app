@@ -1,11 +1,11 @@
 //
-//  User.swift
+//  ApiUser.swift
 //  QiitaApp
 //
-//  Created by kamiya on 2025/01/25.
+//  Created by kamiya on 2025/02/06.
 //
 
-struct User: Codable {
+struct ApiUser: Codable {
     var name: String?
     var followees_count: Int?
     var followers_count: Int?

@@ -44,13 +44,13 @@ struct MyPageView: View {
                 } else if let user = viewModel.user {
                     // 正常にユーザー情報が取得できた場合
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("ユーザー名: \(user.name ?? "未設定")")
+                        Text("ユーザー名: \(user.name)")
                             .font(.headline)
                         Spacer().frame(height: 20)
-                        Text("フォローしている数: \(user.followees_count != nil ? String(user.followees_count!) : "未設定")")
-                        Text("フォローされている数: \(user.followers_count != nil ? String(user.followers_count!) : "未設定")")
-                        Text("Qiitaに公開している記事の数: \(user.items_count != nil ? String(user.items_count!) : "未設定")")
-                        Text("移住地: \(user.location ?? "未設定")")
+                        Text("フォローしている数: \(user.followeesCount)")
+                        Text("フォローされている数: \(user.followersCount)")
+                        Text("Qiitaに公開している記事の数: \(user.itemsCount)")
+                        Text("移住地: \(user.location)")
                     }
                     .padding(.leading)
                 } else {
