@@ -15,8 +15,3 @@ DerivedData/
 
 # ビルド出力ディレクトリ
 build/
-
-# Xcodeスキーム設定（個別設定は不要）
-*.xcscheme
-
-gitignore.save
