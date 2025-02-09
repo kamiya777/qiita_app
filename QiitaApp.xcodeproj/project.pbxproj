@@ -58,24 +58,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BF3FA21D2D54C96000B21B9C /* API */ = {
-			isa = PBXGroup;
-			children = (
-				BF3FA2232D54C9E000B21B9C /* ApiItem.swift */,
-				BF3FA2252D54CA0700B21B9C /* ApiUser.swift */,
-			);
-			path = API;
-			sourceTree = "<group>";
-		};
-		BF3FA21E2D54C96700B21B9C /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				BF3FA21F2D54C98500B21B9C /* Item.swift */,
-				BF3FA2212D54C9A500B21B9C /* User.swift */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
 		BF7A06262D44A663009F6CB3 = {
 			isa = PBXGroup;
 			children = (
@@ -140,8 +122,10 @@
 		BF7A06422D44A795009F6CB3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				BF3FA21E2D54C96700B21B9C /* UI */,
-				BF3FA21D2D54C96000B21B9C /* API */,
+				BF3FA2232D54C9E000B21B9C /* ApiItem.swift */,
+				BF3FA2252D54CA0700B21B9C /* ApiUser.swift */,
+				BF3FA21F2D54C98500B21B9C /* Item.swift */,
+				BF3FA2212D54C9A500B21B9C /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

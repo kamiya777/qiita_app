@@ -6,11 +6,11 @@
 //
 
 struct User {
-    var name: String
-    var followeesCount: Int
-    var followersCount: Int
-    var itemsCount: Int
-    var location: String
+    let name: String
+    let followeesCount: Int
+    let followersCount: Int
+    let itemsCount: Int
+    let location: String
     
     // イニシャライザ
     init(response: ApiUser) {

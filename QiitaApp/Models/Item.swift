@@ -8,7 +8,7 @@
 struct Item: Identifiable, Codable {
     let id: String
     let title: String
-    var body: String
+    let body: String
     let url: String
     
     // ネットワークレスポンスモデルからアプリ用モデルへ変換
