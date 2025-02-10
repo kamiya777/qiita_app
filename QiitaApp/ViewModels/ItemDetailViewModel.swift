@@ -12,47 +12,26 @@ class ItemDetailViewModel: ObservableObject {
     @Published var item: Item?
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
-    
+
+    private var cancellables = Set<AnyCancellable>()
+
+    // アイテム詳細を取得
     func fetchItemDetails(itemId: String) {
         isLoading = true
-        let urlString = "https://qiita.com/api/v2/items/\(itemId)"
         
-        guard let url = URL(string: urlString) else {
-            errorMessage = "Invalid URL"
-            isLoading = false
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            if let error = error {
-                DispatchQueue.main.async {
-                    self?.errorMessage = error.localizedDescription
+        ApiService.shared.fetchItemDetails(itemId: itemId)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                switch completion {
+                case .failure(let error):
+                    self?.errorMessage = "エラーが発生しました: \(error.localizedDescription)"
+                case .finished:
+                    break
                 }
-                return
-            }
-            
-            guard let data = data else {
-                DispatchQueue.main.async {
-                    self?.errorMessage = "No data received"
-                }
-                return
-            }
-            
-            do {
-                // JSONをデコードしてItemを作成
-                let decodedApiItem = try JSONDecoder().decode(ApiItem.self, from: data)
-                
-                // UI関連の処理だけをメインスレッドで行う
-                DispatchQueue.main.async {
-                    self?.isLoading = false
-                    self?.item = Item(from: decodedApiItem)
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    self?.errorMessage = "Failed to decode data"
-                }
-            }
-        }
-        task.resume()
+                self?.isLoading = false
+            }, receiveValue: { [weak self] apiItem in
+                self?.item = Item(from: apiItem)
+            })
+            .store(in: &cancellables)
     }
 }
