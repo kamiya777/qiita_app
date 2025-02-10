@@ -5,7 +5,7 @@
 //  Created by kamiya on 2025/01/25.
 //
 
-struct Item: Identifiable, Codable {
+struct Item: Identifiable {
     let id: String
     let title: String
     let body: String
