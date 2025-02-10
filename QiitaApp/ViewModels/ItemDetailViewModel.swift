@@ -40,12 +40,12 @@ class ItemDetailViewModel: ObservableObject {
             
             do {
                 // JSONをデコードしてItemを作成
-                let decodedItem = try JSONDecoder().decode(Item.self, from: data)
+                let decodedApiItem = try JSONDecoder().decode(ApiItem.self, from: data)
                 
                 // UI関連の処理だけをメインスレッドで行う
                 DispatchQueue.main.async {
                     self?.isLoading = false
-                    self?.item = decodedItem
+                    self?.item = Item(from: decodedApiItem)
                 }
             } catch {
                 DispatchQueue.main.async {
