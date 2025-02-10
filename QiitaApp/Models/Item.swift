@@ -13,9 +13,9 @@ struct Item: Identifiable {
     
     // ネットワークレスポンスモデルからアプリ用モデルへ変換
     init(from response: ApiItem) {
-        self.id = response.id
-        self.title = response.title
-        self.body = response.body
-        self.url = response.url
+        self.id = response.id ?? ""
+        self.title = response.title ?? ""
+        self.body = response.body ?? ""
+        self.url = response.url ?? ""
     }
 }

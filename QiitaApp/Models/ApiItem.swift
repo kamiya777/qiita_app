@@ -6,8 +6,8 @@
 //
 
 struct ApiItem: Codable {
-    let id: String
-    let title: String
-    let body: String
-    let url: String
+    let id: String?
+    let title: String?
+    let body: String?
+    let url: String?
 }
