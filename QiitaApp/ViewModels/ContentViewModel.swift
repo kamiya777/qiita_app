@@ -6,47 +6,36 @@
 //
 
 import SwiftUI
-
+import Combine
 
 class ContentViewModel: ObservableObject {
     @Published var accessToken: String = ""
-    
-    private let apiBaseURL = "https://qiita.com/api/v2/authenticated_user"
+    @Published var isLoggedIn: Bool = false
+    @Published var errorMessage: String?
+
+    private var cancellables = Set<AnyCancellable>()
     
     // ログインアクション
-    func loginAction(completion: @escaping (Result<Void, Error>) -> Void) {
+    func loginAction() {
         guard !accessToken.isEmpty else {
-            completion(.failure(NSError(domain: "Invalid Input", code: 400, userInfo: [NSLocalizedDescriptionKey: "アクセストークンが入力されていません!"])))
+            errorMessage = "アクセストークンが入力されていません!"
             return
         }
-        
-        var request = URLRequest(url: URL(string: apiBaseURL)!)
-        request.httpMethod = "GET"
-        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                DispatchQueue.main.async {
-                    completion(.failure(error))
+
+        ApiService.shared.fetchUserData(accessToken: accessToken)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                switch completion {
+                case .failure:
+                    self?.isLoggedIn = false
+                    self?.errorMessage = "認証に失敗しました"
+                case .finished:
+                    break
                 }
-                return
-            }
-            
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                // 認証成功
-                DispatchQueue.main.async {
-                    completion(.success(()))
-                }
-            } else {
-                // 認証失敗
-                let error = NSError(domain: "Authentication Failed", code: 401, userInfo: [NSLocalizedDescriptionKey: "アクセストークンが間違っています。"])
-                DispatchQueue.main.async {
-                    completion(.failure(error))
-                }
-            }
-        }
-        
-        task.resume()
+            }, receiveValue: { [weak self] _ in
+                self?.isLoggedIn = true
+                self?.errorMessage = nil
+            })
+            .store(in: &cancellables)
     }
 }
-
