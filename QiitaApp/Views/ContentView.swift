@@ -9,11 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var viewModel = ContentViewModel()
-    
-    @State private var isLoggedIn = false
     @State private var isActive = false
-    @State private var showAlert = false
-    @State private var alertMessage = ""
     
     var isVisible: Bool
     
@@ -26,17 +22,7 @@ struct ContentView: View {
                     .frame(width: 300)
                 
                 Button(action: {
-                    viewModel.loginAction { result in
-                        switch result {
-                        case .success:
-                            UserDefaults.standard.set(viewModel.accessToken, forKey: "accessToken")
-                            isLoggedIn = true
-                            isActive = true
-                        case .failure(let error):
-                            alertMessage = error.localizedDescription
-                            showAlert = true
-                        }
-                    }
+                    viewModel.loginAction()
                 }) {
                     Text("ログイン")
                         .foregroundColor(.white)
@@ -58,11 +44,14 @@ struct ContentView: View {
                 Spacer()
             }
             .padding()
-            .alert(isPresented: $showAlert) {
-                Alert(title: Text("エラー"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+            .alert(isPresented: $viewModel.showAlert) {
+                Alert(title: Text("エラー"), message: Text(viewModel.errorMessage ?? "不明なエラー"), dismissButton: .default(Text("OK")))
             }
-            .navigationDestination(isPresented: $isActive) {
-                MainTabView(isLoggedIn: $isLoggedIn)
+            .navigationDestination(isPresented: $viewModel.isLoggedIn) {
+                MainTabView(isLoggedIn: $viewModel.isLoggedIn)
+            }
+            .navigationDestination(isPresented: $isActive){
+                MainTabView(isLoggedIn: .constant(false))
             }
         }
     }

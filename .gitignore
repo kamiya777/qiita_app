@@ -15,3 +15,6 @@ DerivedData/
 
 # ビルド出力ディレクトリ
 build/
+
+# Xcodeのブレークポイント設定ファイル
+Breakpoints_v2.xcbkptlist
