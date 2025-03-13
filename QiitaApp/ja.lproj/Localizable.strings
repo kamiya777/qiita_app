@@ -1,0 +1,36 @@
+/* 
+  Localizable.strings
+  QiitaApp
+
+  Created by kamiya on 2025/03/13.
+  
+*/
+
+"Access Token" = "アクセストークン";
+"Login" = "ログイン";
+"Use without login" = "ログインせずに利用する";
+"Error" = "エラー";
+"OK" = "OK";
+"Unknown error" = "不明なエラー";
+"User" = "ユーザー名: -";
+"Number of followers" = "フォローしている数: -";
+"Number of followees" = "フォローされている数: -";
+"Number of Qiita articles" = "Qiitaに公開している記事の数: -";
+"Location" = "移住地: -";
+"Reload" = "再読み込み";
+"User name: %@" = "ユーザー名: %@";
+"Number of followers: %d" = "フォローしている数: %d";
+"Number of followees: %d" = "フォローされている数: %d";
+"Number of Qiita articles: %d" = "Qiitaに公開している記事の数: %d";
+"Location: %@" = "移住地: %@";
+"Loading" = "読み込み中...";
+"Logout" = "ログアウト";
+"GetUserError" = "ユーザー情報の取得に失敗しました。再度お試しください。";
+"Free word" = "フリーワード";
+"Search" = "検索";
+"Searching" = "検索中...";
+"Search results list" = "検索結果一覧";
+"Article details" = "記事詳細";
+"Error: %@" = "エラー: %@";
+"Search" = "検索";
+"My Page" = "マイページ";

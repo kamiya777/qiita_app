@@ -18,7 +18,7 @@ struct SearchView: View {
         VStack {
             HStack {
                 // フリーワード入力欄
-                TextField("フリーワード", text: $searchText)
+                TextField(LocalizedStringKey("Free word"), text: $searchText)
                     .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(width: 250)
@@ -29,7 +29,7 @@ struct SearchView: View {
                     isSearching = true
                     isActive = true
                 }) {
-                    Text("検索")
+                    Text(LocalizedStringKey("Search"))
                         .foregroundColor(.white)
                         .padding(.horizontal, 15)
                         .padding(.vertical, 12)
@@ -40,7 +40,7 @@ struct SearchView: View {
             .padding()
             
             if viewModel.isLoading {
-                ProgressView("検索中...")
+                ProgressView(LocalizedStringKey("Searching"))
                     .progressViewStyle(CircularProgressViewStyle())
             } else if let errorMessage = viewModel.errorMessage {
                 Text(errorMessage)
@@ -60,4 +60,3 @@ struct SearchView: View {
         }
     }
 }
-

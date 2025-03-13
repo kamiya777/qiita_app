@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF0EEF862D82FA7600238E0C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF0EEF842D82FA7600238E0C /* Localizable.strings */; };
 		BF3FA2202D54C98500B21B9C /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3FA21F2D54C98500B21B9C /* Item.swift */; };
 		BF3FA2222D54C9A500B21B9C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3FA2212D54C9A500B21B9C /* User.swift */; };
 		BF3FA2242D54C9E000B21B9C /* ApiItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3FA2232D54C9E000B21B9C /* ApiItem.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF0EEF872D82FA8300238E0C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BF3FA21F2D54C98500B21B9C /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		BF3FA2212D54C9A500B21B9C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BF3FA2232D54C9E000B21B9C /* ApiItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiItem.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				BF7A06322D44A663009F6CB3 /* QiitaAppApp.swift */,
 				BF7A06362D44A664009F6CB3 /* Assets.xcassets */,
 				BF7A06382D44A664009F6CB3 /* Preview Content */,
+				BF0EEF842D82FA7600238E0C /* Localizable.strings */,
 			);
 			path = QiitaApp;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = BF7A06262D44A663009F6CB3;
 			productRefGroup = BF7A06302D44A663009F6CB3 /* Products */;
@@ -200,6 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF7A063A2D44A664009F6CB3 /* Preview Assets.xcassets in Resources */,
+				BF0EEF862D82FA7600238E0C /* Localizable.strings in Resources */,
 				BF7A06372D44A664009F6CB3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,6 +236,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BF0EEF842D82FA7600238E0C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF0EEF872D82FA8300238E0C /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		BF7A063B2D44A664009F6CB3 /* Debug */ = {
