@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 class ApiService {
-    static let shared = ApiService()
+    static let apiService = ApiService()
     
     private init() {}
     
@@ -45,9 +45,7 @@ class ApiService {
     
     // アイテムの詳細を取得する
     func fetchItemDetails(itemId: String) -> AnyPublisher<ApiItem, Error> {
-        let urlString = "https://qiita.com/api/v2/items/\(itemId)"
-        
-        guard let url = URL(string: urlString) else {
+        guard let url = URL(string: "https://qiita.com/api/v2/items/\(itemId)") else {
             return Fail(error: NSError(domain: "Invalid URL", code: 400, userInfo: nil)).eraseToAnyPublisher()
         }
         
