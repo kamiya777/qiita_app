@@ -15,9 +15,7 @@ class ApiService {
     
     // ユーザー情報を取得する
     func fetchUserData(accessToken: String) -> AnyPublisher<ApiUser, Error> {
-        guard let url = URL(string: "https://qiita.com/api/v2/authenticated_user") else {
-            return Fail(error: NSError(domain: "Invalid URL", code: 400, userInfo: nil)).eraseToAnyPublisher()
-        }
+        let url = URL(string: "https://qiita.com/api/v2/authenticated_user")!
         
         var request = URLRequest(url: url)
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
