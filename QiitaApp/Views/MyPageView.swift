@@ -19,13 +19,13 @@ struct MyPageView: View {
                 if viewModel.hasError {
                     // エラー発生時の表示（ユーザー情報取得失敗）
                     VStack(alignment: .leading, spacing: 10) {
-                        Text(LocalizedStringKey("User"))
+                        Text(LocalizedStringKey("user"))
                             .font(.headline)
                         Spacer().frame(height: 20)
-                        Text(LocalizedStringKey("Number of followers"))
-                        Text(LocalizedStringKey("Number of followees"))
-                        Text(LocalizedStringKey("Number of Qiita articles"))
-                        Text(LocalizedStringKey("Location"))
+                        Text(LocalizedStringKey("numberOfFollowers"))
+                        Text(LocalizedStringKey("numberOfFollowees"))
+                        Text(LocalizedStringKey("numberOfQiitaArticles"))
+                        Text(LocalizedStringKey("location"))
                     }
                     .padding(.leading)
                     Spacer().frame(height: 40)
@@ -36,7 +36,7 @@ struct MyPageView: View {
                             viewModel.fetchUserData(accessToken: token)
                         }
                     }) {
-                        Text(LocalizedStringKey("Reload"))
+                        Text(LocalizedStringKey("reload"))
                             .foregroundColor(.blue)
                             .padding()
                             .background(Capsule().strokeBorder(Color.blue, lineWidth: 2))
@@ -44,18 +44,18 @@ struct MyPageView: View {
                 } else if let user = viewModel.user {
                     // 正常にユーザー情報が取得できた場合
                     VStack(alignment: .leading, spacing: 10) {
-                        Text(String(format: NSLocalizedString("User name: %@", comment: ""), arguments: [user.name]))
+                        Text(LocalizedStringKey("userName \(user.name)"))
                             .font(.headline)
                         Spacer().frame(height: 20)
-                        Text(String(format: NSLocalizedString("Number of followers: %d", comment: ""), arguments: [user.followeesCount]))
-                        Text(String(format: NSLocalizedString("Number of followees: %d", comment: ""), arguments: [user.followersCount]))
-                        Text(String(format: NSLocalizedString("Number of Qiita articles: %d", comment: ""), arguments: [user.itemsCount]))
-                        Text(String(format: NSLocalizedString("Location: %@", comment: ""), arguments: [user.location]))
+                        Text(LocalizedStringKey("numberOfFollowersCount \(user.followeesCount)"))
+                        Text(LocalizedStringKey("numberOfFolloweesCount \(user.followersCount)"))
+                        Text(LocalizedStringKey("numberOfQiitaArticlesCount \(user.itemsCount)"))
+                        Text(LocalizedStringKey("locationString \(user.location)"))
                     }
                     .padding(.leading)
                 } else {
                     // 読み込み中の場合
-                    ProgressView(LocalizedStringKey("Loading"))
+                    ProgressView(LocalizedStringKey("loading"))
                         .padding()
                 }
                 
@@ -66,7 +66,7 @@ struct MyPageView: View {
                         viewModel.logout()
                         isLoggedIn = false
                     }) {
-                        Text(LocalizedStringKey("Logout"))
+                        Text(LocalizedStringKey("logout"))
                             .foregroundColor(.red)
                             .padding()
                             .background(Capsule().strokeBorder(Color.red, lineWidth: 2))
@@ -89,9 +89,9 @@ struct MyPageView: View {
         .alert(isPresented: $showAlert) {
             // アラートを表示する条件を指定
             Alert(
-                title: Text(LocalizedStringKey("Error")),
-                message: Text(LocalizedStringKey("GetUserError")),
-                dismissButton: .default(Text(LocalizedStringKey("OK")))
+                title: Text(LocalizedStringKey("error")),
+                message: Text(LocalizedStringKey("getUserError")),
+                dismissButton: .default(Text(LocalizedStringKey("ok")))
             )
         }
         // hasErrorがtrueの時アラート表示する

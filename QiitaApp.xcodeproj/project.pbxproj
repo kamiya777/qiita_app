@@ -181,11 +181,9 @@
 			};
 			buildConfigurationList = BF7A062A2D44A663009F6CB3 /* Build configuration list for PBXProject "QiitaApp" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ja;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
-				Base,
 				ja,
 			);
 			mainGroup = BF7A06262D44A663009F6CB3;

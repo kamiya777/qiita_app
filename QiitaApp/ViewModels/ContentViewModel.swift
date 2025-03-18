@@ -11,7 +11,7 @@ import Combine
 class ContentViewModel: ObservableObject {
     @Published var accessToken: String = ""
     @Published var isLoggedIn: Bool = false
-    @Published var errorMessage: String?
+    @Published var errorMessage: LocalizedStringKey?
     @Published var showAlert: Bool = false
     
     private var cancellables = Set<AnyCancellable>()
@@ -19,7 +19,7 @@ class ContentViewModel: ObservableObject {
     // ログインアクション
     func loginAction() {
             guard !accessToken.isEmpty else {
-                errorMessage = "アクセストークンが入力されていません!"
+                errorMessage = "emptyAccessToken"
                 showAlert = true
                 return
             }
@@ -30,7 +30,7 @@ class ContentViewModel: ObservableObject {
                     switch completion {
                     case .failure(let error):
                         self.isLoggedIn = false
-                        self.errorMessage = error.localizedDescription
+                        self.errorMessage = LocalizedStringKey(error.localizedDescription)
                         self.showAlert = true
                     case .finished:
                         break
