@@ -16,7 +16,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                TextField(LocalizedStringKey("accessToken"), text: $viewModel.accessToken)
+                TextField(LocalizedStringKey("loginViewAccessTokenPlaceHolder"), text: $viewModel.accessToken)
                     .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(width: 300)
@@ -24,7 +24,7 @@ struct ContentView: View {
                 Button(action: {
                     viewModel.loginAction()
                 }) {
-                    Text(LocalizedStringKey("login"))
+                    Text(LocalizedStringKey("loginViewLoginButton"))
                         .foregroundColor(.white)
                         .frame(width: 200, height: 50)
                         .background(Color.blue)
@@ -35,7 +35,7 @@ struct ContentView: View {
                     Button(action: {
                         isActive = true
                     }) {
-                        Text(LocalizedStringKey("useWithoutLogin"))
+                        Text(LocalizedStringKey("loginViewUseWithoutLoginText"))
                             .foregroundColor(.blue)
                             .padding()
                     }
@@ -45,7 +45,7 @@ struct ContentView: View {
             }
             .padding()
             .alert(isPresented: $viewModel.showAlert) {
-                Alert(title: Text(LocalizedStringKey("error")), message: Text(viewModel.errorMessage ?? String(localized: "unknownError")), dismissButton: .default(Text(LocalizedStringKey("ok"))))
+                Alert(title: Text(LocalizedStringKey("errorText")), message: Text(viewModel.errorMessage ?? LocalizedStringKey("loginViewUnknownError")), dismissButton: .default(Text(LocalizedStringKey("okDismissButton"))))
             }
             .navigationDestination(isPresented: $viewModel.isLoggedIn) {
                 MainTabView(isLoggedIn: $viewModel.isLoggedIn)

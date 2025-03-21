@@ -14,12 +14,12 @@ struct MainTabView: View {
         TabView {
             SearchView()
                 .tabItem {
-                    Label(LocalizedStringKey("search"), systemImage: "magnifyingglass")
+                    Label(LocalizedStringKey("searchViewTitle"), systemImage: "magnifyingglass")
                 }
             
             MyPageView(isLoggedIn: $isLoggedIn)
                 .tabItem {
-                    Label(LocalizedStringKey("myPage"), systemImage: "person.circle")
+                    Label(LocalizedStringKey("myPageViewTitle"), systemImage: "person.circle")
                 }
         }
     }

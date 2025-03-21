@@ -14,7 +14,7 @@ struct ItemDetailView: View {
     var body: some View {
         VStack {
             if viewModel.isLoading {
-                ProgressView(LocalizedStringKey("loading"))
+                ProgressView(LocalizedStringKey("loadingText"))
                     .progressViewStyle(CircularProgressViewStyle())
             } else if let item = viewModel.item {
                 Text(item.title)
@@ -33,7 +33,7 @@ struct ItemDetailView: View {
             
             Spacer()
         }
-        .navigationTitle(LocalizedStringKey("articleDetails"))
+        .navigationTitle(LocalizedStringKey("itemDetailViewTitle"))
         .onAppear {
             viewModel.fetchItemDetails(itemId: itemId)
         }

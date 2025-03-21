@@ -29,7 +29,7 @@ class SearchViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
-                case .failure(let error):
+                case .failure:
                     self?.errorMessage = LocalizedStringKey("genericError")
                 case .finished:
                     break
