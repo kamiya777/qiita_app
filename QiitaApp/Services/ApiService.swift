@@ -9,9 +9,6 @@ import Foundation
 import Combine
 
 class ApiService {
-    static let apiService = ApiService()
-    
-    private init() {}
     
     // ユーザー情報を取得する
     func fetchUserData(accessToken: String) -> AnyPublisher<ApiUser, Error> {

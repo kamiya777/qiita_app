@@ -24,7 +24,7 @@ class ContentViewModel: ObservableObject {
                 return
             }
 
-            ApiService.apiService.fetchUserData(accessToken: accessToken)
+            ApiService().fetchUserData(accessToken: accessToken)
                 .receive(on: DispatchQueue.main)
                 .sink(receiveCompletion: { completion in
                     switch completion {

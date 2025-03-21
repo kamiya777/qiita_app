@@ -25,7 +25,7 @@ class SearchViewModel: ObservableObject {
         self.isLoading = true
         self.errorMessage = nil
 
-        ApiService.apiService.searchItems(query: query)
+        ApiService().searchItems(query: query)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
