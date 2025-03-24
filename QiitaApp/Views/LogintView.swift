@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  LoginView.swift
 //  QiitaApp
 //
 //  Created by kamiya on 2025/01/25.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @ObservedObject var viewModel = ContentViewModel()
+struct LoginView: View {
+    @ObservedObject var viewModel = LoginViewModel()
     @State private var isActive = false
     
     var isVisible: Bool

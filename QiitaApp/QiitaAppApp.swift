@@ -11,7 +11,7 @@ import SwiftUI
 struct QiitaAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(isVisible: true)
+            LoginView(isVisible: true)
         }
     }
 }

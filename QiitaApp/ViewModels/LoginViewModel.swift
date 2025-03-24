@@ -1,5 +1,5 @@
 //
-//  ContentViewModel.swift
+//  LoginViewModel.swift
 //  QiitaApp
 //
 //  Created by kamiya on 2025/01/25.
@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-class ContentViewModel: ObservableObject {
+class LoginViewModel: ObservableObject {
     @Published var accessToken: String = ""
     @Published var isLoggedIn: Bool = false
     @Published var errorMessage: LocalizedStringKey?
