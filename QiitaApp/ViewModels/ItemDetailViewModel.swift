@@ -19,7 +19,7 @@ class ItemDetailViewModel: ObservableObject {
     func fetchItemDetails(itemId: String) {
         isLoading = true
         
-        ApiService.shared.fetchItemDetails(itemId: itemId)
+        ApiService().fetchItemDetails(itemId: itemId)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {

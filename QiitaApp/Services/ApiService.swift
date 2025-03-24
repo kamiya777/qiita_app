@@ -9,15 +9,10 @@ import Foundation
 import Combine
 
 class ApiService {
-    static let shared = ApiService()
-    
-    private init() {}
     
     // ユーザー情報を取得する
     func fetchUserData(accessToken: String) -> AnyPublisher<ApiUser, Error> {
-        guard let url = URL(string: "https://qiita.com/api/v2/authenticated_user") else {
-            return Fail(error: NSError(domain: "Invalid URL", code: 400, userInfo: nil)).eraseToAnyPublisher()
-        }
+        let url = URL(string: "https://qiita.com/api/v2/authenticated_user")!
         
         var request = URLRequest(url: url)
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
@@ -45,9 +40,7 @@ class ApiService {
     
     // アイテムの詳細を取得する
     func fetchItemDetails(itemId: String) -> AnyPublisher<ApiItem, Error> {
-        let urlString = "https://qiita.com/api/v2/items/\(itemId)"
-        
-        guard let url = URL(string: urlString) else {
+        guard let url = URL(string: "https://qiita.com/api/v2/items/\(itemId)") else {
             return Fail(error: NSError(domain: "Invalid URL", code: 400, userInfo: nil)).eraseToAnyPublisher()
         }
         

@@ -24,7 +24,7 @@ class LoginViewModel: ObservableObject {
                 return
             }
 
-            ApiService.shared.fetchUserData(accessToken: accessToken)
+            ApiService().fetchUserData(accessToken: accessToken)
                 .receive(on: DispatchQueue.main)
                 .sink(receiveCompletion: { completion in
                     switch completion {
