@@ -21,6 +21,6 @@ struct SearchResultView: View {
                 .padding(.vertical, 5)
             }
         }
-        .navigationTitle("検索結果一覧")
+        .navigationTitle(LocalizedStringKey("searchResultViewListTitle"))
     }
 }

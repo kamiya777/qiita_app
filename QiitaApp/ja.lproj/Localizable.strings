@@ -1,0 +1,48 @@
+/* 
+  Localizable.strings
+  QiitaApp
+
+  Created by kamiya on 2025/03/13.
+  
+*/
+
+"errorText" = "エラー";
+"loadingText" = "読み込み中...";
+"okDismissButton" = "OK";
+
+
+"loginViewAccessTokenPlaceHolder" = "アクセストークン";
+"loginViewLoginButton" = "ログイン";
+"loginViewUseWithoutLoginText" = "ログインせずに利用する";
+"loginViewUnknownError" = "不明なエラー";
+
+"myPageViewUser" = "ユーザー名: -";
+"myPageViewNumberOfFollowers" = "フォローしている数: -";
+"myPageViewNumberOfFollowees" = "フォローされている数: -";
+"myPageViewNumberOfQiitaArticles" = "Qiitaに公開している記事の数: -";
+"myPageViewLocation" = "移住地: -";
+"myPageViewReload" = "再読み込み";
+"myPageViewUserName" = "ユーザー名: %@";
+"myPageViewNumberOfFollowersCount" = "フォローしている数: %d";
+"myPageViewNumberOfFolloweesCount" = "フォローされている数: %d";
+"myPageViewNumberOfQiitaArticlesCount" = "Qiitaに公開している記事の数: %d";
+"myPageViewLocationString" = "移住地: %@";
+
+"myPageViewLogout" = "ログアウト";
+"myPageViewGetUserError" = "ユーザー情報の取得に失敗しました。再度お試しください。";
+
+"searchViewFreeWordPlaceHolder" = "フリーワード";
+"searchViewSearchButton" = "検索";
+"searchViewSearching" = "検索中...";
+
+"searchResultViewListTitle" = "検索結果一覧";
+
+"itemDetailViewTitle" = "記事詳細";
+
+"myPageViewTitle" = "マイページ";
+"searchViewTitle" = "検索";
+
+
+"genericError" = "エラーが発生しました";
+"errorOccurred" = "エラーが発生しました: %@";
+"emptyAccessToken" = "アクセストークンが入力されていません!";
