@@ -11,7 +11,7 @@ import Combine
 class ItemDetailViewModel: ObservableObject {
     @Published var item: Item?
     @Published var isLoading: Bool = false
-    @Published var errorMessage: String?
+    @Published var errorMessage: LocalizedStringKey?
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -24,7 +24,7 @@ class ItemDetailViewModel: ObservableObject {
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                 case .failure(let error):
-                    self?.errorMessage = "エラーが発生しました: \(error.localizedDescription)"
+                    self?.errorMessage = LocalizedStringKey("errorOccurred \(error.localizedDescription)")
                 case .finished:
                     break
                 }

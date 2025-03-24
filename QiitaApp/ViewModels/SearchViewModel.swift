@@ -11,16 +11,16 @@ import Combine
 class SearchViewModel: ObservableObject {
     @Published var searchResults: [Item] = []
     @Published var isLoading: Bool = false
-    @Published var errorMessage: String? = nil
+    @Published var errorMessage: LocalizedStringKey? = nil
     
     private var cancellables = Set<AnyCancellable>()
-
+    
     // 検索処理
     func searchItems(query: String) {
         guard !query.isEmpty else {
             return
         }
-
+        
         self.searchResults = []
         self.isLoading = true
         self.errorMessage = nil
@@ -29,8 +29,8 @@ class SearchViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
-                case .failure(let error):
-                    self?.errorMessage = "エラーが発生しました: \(error.localizedDescription)"
+                case .failure:
+                    self?.errorMessage = LocalizedStringKey("genericError")
                 case .finished:
                     break
                 }

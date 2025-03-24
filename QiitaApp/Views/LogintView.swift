@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  LoginView.swift
 //  QiitaApp
 //
 //  Created by kamiya on 2025/01/25.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @ObservedObject var viewModel = ContentViewModel()
+struct LoginView: View {
+    @ObservedObject var viewModel = LoginViewModel()
     @State private var isActive = false
     
     var isVisible: Bool
@@ -16,7 +16,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                TextField("アクセストークン", text: $viewModel.accessToken)
+                TextField(LocalizedStringKey("loginViewAccessTokenPlaceHolder"), text: $viewModel.accessToken)
                     .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(width: 300)
@@ -24,7 +24,7 @@ struct ContentView: View {
                 Button(action: {
                     viewModel.loginAction()
                 }) {
-                    Text("ログイン")
+                    Text(LocalizedStringKey("loginViewLoginButton"))
                         .foregroundColor(.white)
                         .frame(width: 200, height: 50)
                         .background(Color.blue)
@@ -35,7 +35,7 @@ struct ContentView: View {
                     Button(action: {
                         isActive = true
                     }) {
-                        Text("ログインせずに利用する")
+                        Text(LocalizedStringKey("loginViewUseWithoutLoginText"))
                             .foregroundColor(.blue)
                             .padding()
                     }
@@ -45,12 +45,12 @@ struct ContentView: View {
             }
             .padding()
             .alert(isPresented: $viewModel.showAlert) {
-                Alert(title: Text("エラー"), message: Text(viewModel.errorMessage ?? "不明なエラー"), dismissButton: .default(Text("OK")))
+                Alert(title: Text(LocalizedStringKey("errorText")), message: Text(viewModel.errorMessage ?? LocalizedStringKey("loginViewUnknownError")), dismissButton: .default(Text(LocalizedStringKey("okDismissButton"))))
             }
             .navigationDestination(isPresented: $viewModel.isLoggedIn) {
                 MainTabView(isLoggedIn: $viewModel.isLoggedIn)
             }
-            .navigationDestination(isPresented: $isActive){
+            .navigationDestination(isPresented: $isActive) {
                 MainTabView(isLoggedIn: .constant(false))
             }
         }

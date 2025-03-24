@@ -19,13 +19,13 @@ struct MyPageView: View {
                 if viewModel.hasError {
                     // エラー発生時の表示（ユーザー情報取得失敗）
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("ユーザー名: -")
+                        Text(LocalizedStringKey("myPageViewUser"))
                             .font(.headline)
                         Spacer().frame(height: 20)
-                        Text("フォローしている数: -")
-                        Text("フォローされている数: -")
-                        Text("Qiitaに公開している記事の数: -")
-                        Text("移住地: -")
+                        Text(LocalizedStringKey("myPageViewNumberOfFollowers"))
+                        Text(LocalizedStringKey("myPageViewNumberOfFollowees"))
+                        Text(LocalizedStringKey("myPageViewNumberOfQiitaArticles"))
+                        Text(LocalizedStringKey("myPageViewLocation"))
                     }
                     .padding(.leading)
                     Spacer().frame(height: 40)
@@ -36,7 +36,7 @@ struct MyPageView: View {
                             viewModel.fetchUserData(accessToken: token)
                         }
                     }) {
-                        Text("再読み込み")
+                        Text(LocalizedStringKey("myPageViewReload"))
                             .foregroundColor(.blue)
                             .padding()
                             .background(Capsule().strokeBorder(Color.blue, lineWidth: 2))
@@ -44,18 +44,18 @@ struct MyPageView: View {
                 } else if let user = viewModel.user {
                     // 正常にユーザー情報が取得できた場合
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("ユーザー名: \(user.name)")
+                        Text(LocalizedStringKey("myPageViewUserName \(user.name)"))
                             .font(.headline)
                         Spacer().frame(height: 20)
-                        Text("フォローしている数: \(user.followeesCount)")
-                        Text("フォローされている数: \(user.followersCount)")
-                        Text("Qiitaに公開している記事の数: \(user.itemsCount)")
-                        Text("移住地: \(user.location)")
+                        Text(LocalizedStringKey("myPageViewNumberOfFollowersCount \(user.followeesCount)"))
+                        Text(LocalizedStringKey("myPageViewNumberOfFolloweesCount \(user.followersCount)"))
+                        Text(LocalizedStringKey("myPageViewNumberOfQiitaArticlesCount \(user.itemsCount)"))
+                        Text(LocalizedStringKey("myPageViewLocationString \(user.location)"))
                     }
                     .padding(.leading)
                 } else {
                     // 読み込み中の場合
-                    ProgressView("読み込み中...")
+                    ProgressView(LocalizedStringKey("loadingText"))
                         .padding()
                 }
                 
@@ -66,7 +66,7 @@ struct MyPageView: View {
                         viewModel.logout()
                         isLoggedIn = false
                     }) {
-                        Text("ログアウト")
+                        Text(LocalizedStringKey("myPageViewLogout"))
                             .foregroundColor(.red)
                             .padding()
                             .background(Capsule().strokeBorder(Color.red, lineWidth: 2))
@@ -75,7 +75,7 @@ struct MyPageView: View {
                 }
                 .padding(.horizontal)
             } else {
-                ContentView(isVisible: isLoggedIn)
+                LogintView(isVisible: isLoggedIn)
             }
             
             Spacer()
@@ -89,9 +89,9 @@ struct MyPageView: View {
         .alert(isPresented: $showAlert) {
             // アラートを表示する条件を指定
             Alert(
-                title: Text("エラー"),
-                message: Text("ユーザー情報の取得に失敗しました。再度お試しください。"),
-                dismissButton: .default(Text("OK"))
+                title: Text(LocalizedStringKey("errorText")),
+                message: Text(LocalizedStringKey("myPageViewGetUserError")),
+                dismissButton: .default(Text(LocalizedStringKey("okDismissButton")))
             )
         }
         // hasErrorがtrueの時アラート表示する

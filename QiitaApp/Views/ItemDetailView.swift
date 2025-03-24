@@ -14,7 +14,7 @@ struct ItemDetailView: View {
     var body: some View {
         VStack {
             if viewModel.isLoading {
-                ProgressView("Loading...")
+                ProgressView(LocalizedStringKey("loadingText"))
                     .progressViewStyle(CircularProgressViewStyle())
             } else if let item = viewModel.item {
                 Text(item.title)
@@ -26,14 +26,14 @@ struct ItemDetailView: View {
                         .padding()
                 }
             } else if let errorMessage = viewModel.errorMessage {
-                Text("Error: \(errorMessage)")
+                Text(errorMessage)
                     .foregroundColor(.red)
                     .padding()
             }
             
             Spacer()
         }
-        .navigationTitle("記事詳細")
+        .navigationTitle(LocalizedStringKey("itemDetailViewTitle"))
         .onAppear {
             viewModel.fetchItemDetails(itemId: itemId)
         }
